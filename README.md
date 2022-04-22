@@ -31,16 +31,18 @@ Initialize the generator;
 
 ```ruby
 Tc::Generator.configure do |configuration|
-  configuration.template_path = 'path/to/erb/template'
-  configuration.dataset_path  = 'path/to/json/dataset'
+  configuration.target_folder_path     =  'path/to/target/folder'
+  configuration.target_filename        =  'filename'
+  configuration.dataset_path           =  'path/to/json/dataset'
+  configuration.template_path          =  'path/to/erb/template'
+  configuration.section_join_character = ';'
 end
 ```
 
-### Generate document to target path
+### Run the generator
 
 ```ruby
-target_path = 'path/to/target/output'
-Tc::Generator::Document.call(target_path: target_path)
+Tc::Generator::Run.call
 ```
 
 After doing the steps above. One should have a document generated on the target path.
@@ -60,8 +62,10 @@ For your platform do;
 
 ```sh
 bundle lock --add-platform [PLATFORM]
+```
 
-Then run `bundle install`
+Then run `bundle install`.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Sylvance/tc-generator.
