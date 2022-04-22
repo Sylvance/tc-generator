@@ -47,6 +47,39 @@ Tc::Generator::Run.call
 
 After doing the steps above. One should have a document generated on the target path.
 
+Check the `examples` folder readme to see the steps for this in action.
+
+### Dataset format
+
+The gem expects dataset in a json file in this format below;
+
+```json
+{
+  "clauses": [
+    { "id": 1, "text": "The quick brown fox" },
+    { "id": 2, "text": "jumps over the lazy dog" },
+    { "id": 3, "text": "And dies" },
+    { "id": 4, "text": "The white horse is white" }
+  ],
+  "sections":
+  [
+    { "id": 1, "clauses_ids": [1, 2] }
+  ]
+}
+```
+
+### Template 
+
+The gem expects template in a plain file in this format below;
+
+```txt
+A T&C Document
+This document is made of plaintext.
+Is made of [CLAUSE-3].
+Is made of [CLAUSE-4].
+Is made of [SECTION-1].
+Your legals.
+```
 
 ## Development & Testing
 
