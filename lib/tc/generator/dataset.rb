@@ -26,7 +26,8 @@ module Tc
       # @return [Hash] the formatted dataset
       def call
         file = File.read(path)
-        data = JSON.parse(File.read(file))
+
+        data = JSON.parse(file)
         formatted_clauses = format_clauses_to_array(data["clauses"])
 
         {
@@ -38,15 +39,16 @@ module Tc
       private
 
       def format_clauses_to_array(clauses)
-        sorted = clauses.sort_by { |clause| clause[:id] }
-        sorted.map { |clause| clause[:text] }
+        sorted = clauses.sort_by { |clause| clause["id"] }
+        sorted.map { |clause| clause["text"] }
       end
 
       def format_sections_to_array(sections, formatted_clauses)
-        sorted = sections.sort_by { |section| section[:id] }
-        result = sorted.map { |section| section[:clauses_ids] }
+        sorted = sections.sort_by { |section| section["id"] }
+        result = sorted.map { |section| section["clauses_ids"] }
         result.map do |clauses_ids|
-          formatted_clauses.values_at(*clauses_ids).join(section_join_char)
+          remapped_clauses_ids = clauses_ids.map { |clause_id| clause_id - 1 }
+          formatted_clauses.values_at(*remapped_clauses_ids).join(section_join_char)
         end
       end
     end

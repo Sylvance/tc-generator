@@ -33,7 +33,7 @@ module Tc
       def convert_file_erb_file(template_file)
         new_contents = template_file.gsub("[CLAUSE-", "<%= @clauses[")
         new_contents1 = new_contents.gsub("[SECTION-", "<%= @sections[")
-        new_contents2 = new_contents1.gsub("]", " %>")
+        new_contents2 = new_contents1.gsub("]", " - 1] %>")
         template_path = erb_filepath
 
         File.open(template_path, "w+") do |f|
